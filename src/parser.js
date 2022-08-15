@@ -1,8 +1,8 @@
-
 const getFormat = (obj, format) => {
-    if (format === 'json') {
-        return JSON.parse(obj);
-    }
-}
+  switch (format) {
+    case 'json': return JSON.parse(obj);
+    default: return '!';
+  }
+};
 
 export default getFormat;

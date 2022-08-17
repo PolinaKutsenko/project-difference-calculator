@@ -8,7 +8,7 @@ publish: #добавление учебного пакета (не в основ
 	npm publish --dry-run
 
 test: #запуск тестов
-	npx jest --watch
+	npx jest
 
 lint: #проверка линтером
 	npx eslint .

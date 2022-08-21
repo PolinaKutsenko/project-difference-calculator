@@ -9,23 +9,23 @@ const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-test('genDiff_plain.yaml', () => {
+test('genDiff_plain', () => {
   const result = readFile('result_plain.txt');
-  const filepath1 = getFixturePath('file1_plain.yaml');
-  const filepath2 = getFixturePath('file2_plain.yaml');
-  expect(genDiff(filepath1, filepath2)).toEqual(result);
+  const filepath1 = getFixturePath('file1.yaml');
+  const filepath2 = getFixturePath('file2.yaml');
+  expect(genDiff(filepath1, filepath2, 'plain')).toEqual(result);
 });
 
-test('genDiff.json', () => {
-  const result = readFile('result.txt');
+test('genDiff_json', () => {
+  const result = readFile('result_json.txt');
   const filepath1 = getFixturePath('file1.json');
   const filepath2 = getFixturePath('file2.json');
-  expect(genDiff(filepath1, filepath2)).toEqual(result);
+  expect(genDiff(filepath1, filepath2, 'json')).toEqual(result);
 });
 
-test('genDiff.yml', () => {
-  const result = readFile('result.txt');
-  const filepath1 = getFixturePath('file1.yml');
-  const filepath2 = getFixturePath('file2.yml');
+test('genDiff_stylish', () => {
+  const result = readFile('result_stylish.txt');
+  const filepath1 = getFixturePath('file1.yaml');
+  const filepath2 = getFixturePath('file2.yaml');
   expect(genDiff(filepath1, filepath2)).toEqual(result);
 });

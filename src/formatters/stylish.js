@@ -15,9 +15,9 @@ const stringify = (data, depthTree) => {
   if (!_.isObject(data)) {
     return `${data}`;
   }
-  const replacer = ' '.repeat(4);
-  const beginIndent = replacer.repeat(depthTree + 2);
-  const endIndient = replacer.repeat(depthTree - 1);
+  const replacer = ' '.repeat(2);
+  const beginIndent = replacer.repeat(depthTree + 3);
+  const endIndient = replacer.repeat(depthTree + 1);
   const keys = _.keys(data);
   const result = keys.map((key) => `${beginIndent}${key}: ${stringify(data[key], depthTree + 2)}`);
   return ['{', ...result, `${endIndient}}`].join('\n');

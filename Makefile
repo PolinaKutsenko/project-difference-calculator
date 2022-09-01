@@ -13,5 +13,5 @@ test: #запуск тестов
 lint: #проверка линтером
 	npx eslint .
 
-test_coverage: #покрытие тестами
+test-coverage: #покрытие тестами
 	npx jest --coverage

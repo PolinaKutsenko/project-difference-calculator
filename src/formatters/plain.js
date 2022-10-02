@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const getType = (value) => {
+const stringify = (value) => {
   if (_.isObject(value)) {
     return '[complex value]';
   }
@@ -12,18 +12,19 @@ const getPlain = (tree) => {
       if (obj.type === 'nested') {
         return iter(obj.children, `${path}${obj.key}.`);
       }
-      switch (obj.status) {
+      switch (obj.type) {
         case 'added':
-          return `Property '${path}${obj.key}' was added with value: ${getType(obj.value)}`;
+          return `Property '${path}${obj.key}' was added with value: ${stringify(obj.value)}`;
         case 'deleted':
           return `Property '${path}${obj.key}' was removed`;
         case 'changed':
-          return `Property '${path}${obj.key}' was updated. From ${getType(obj.value[0])} to ${getType(obj.value[1])}`;
+          return `Property '${path}${obj.key}' was updated. From ${stringify(obj.value[0])} to ${stringify(obj.value[1])}`;
         default:
-          return [];
+          return null;
       }
     });
-    return plainTree.join('\n');
+    const treeWithoutEmpties = plainTree.filter((node) => node !== null);
+    return treeWithoutEmpties.join('\n');
   };
   return iter(tree, '');
 };

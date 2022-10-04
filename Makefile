@@ -1,17 +1,17 @@
-install: #установка зависимостей
+install:
 	npm ci
 
-gendiff: #запуск файла gendiff.js через make gendiff
+gendiff:
 	node bin/gendiff.js
 
-publish: #добавление учебного пакета (не в основной каталог NPM)
+publish:
 	npm publish --dry-run
 
-test: #запуск тестов
+test:
 	npx jest
 
-lint: #проверка линтером
+lint:
 	npx eslint .
 
-test-coverage: #покрытие тестами
+test-coverage:
 	npx jest --coverage

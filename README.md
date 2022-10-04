@@ -14,7 +14,7 @@ Difference Calculator program designed to show diffrence between ".json" and ".y
 # Setup:
 - Install and update Node.js package.<br>
 - Install npm, which allows your Node.js to install modules and packages <br>
-- Clone repository with Brain-Games at your laptop: https://github.com/AleksKutsenko/frontend-project-lvl2.git <br>
+- Clone repository with Brain-Games at your laptop: https://github.com/PolinaKutsenko/project-difference-calculator <br>
 - For make program run properly check depencies by entering in command line: make install <br>
 - If you wnat to compare any json or yml files first enter in command line the : gendiff -h , and you will see help message <br>
 

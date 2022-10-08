@@ -18,11 +18,13 @@ const getPlain = (tree) => {
           return `Property '${path}${obj.key}' was removed`;
         case 'changed':
           return `Property '${path}${obj.key}' was updated. From ${stringify(obj.value1)} to ${stringify(obj.value2)}`;
+        case 'unchanged':
+          return null;
         default:
-          return 'unchanged property';
+          throw new Error(`Unknown object type: ${obj.type}`);
       }
     });
-    const treeWithoutUnchanges = plainTree.filter((node) => node !== 'unchanged property');
+    const treeWithoutUnchanges = plainTree.filter((node) => node !== null);
     return treeWithoutUnchanges.join('\n');
   };
   return iter(tree, '');

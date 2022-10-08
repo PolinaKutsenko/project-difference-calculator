@@ -1,22 +1,37 @@
 import _ from 'lodash';
 
-const getIndent = (spaces) => '  '.repeat(spaces);
+const getIndent = (depth) => {
+  const replacer = '  ';
+  const spacesCount = 2;
+  const indent = depth * spacesCount;
+  const indents = {
+    stringifyObj: {
+      beginIndent: replacer.repeat(indent + 2),
+      endIndent: replacer.repeat(indent),
+    },
+    changedObj: {
+      beginIndent: replacer.repeat(indent - 1),
+      endIndent: replacer.repeat(indent - 2),
+    },
+  };
+  return indents;
+};
 
-const stringify = (data, depthTree) => {
+const stringify = (data, depth) => {
   if (!_.isObject(data)) {
     return `${data}`;
   }
-  const beginIndent = getIndent(2 * depthTree + 2);
-  const endIndent = getIndent(2 * depthTree);
+  const indent = getIndent(depth);
   const keys = _.keys(data);
-  const result = keys.map((key) => `${beginIndent}${key}: ${stringify(data[key], depthTree + 1)}`);
-  return ['{', ...result, `${endIndent}}`].join('\n');
+  const result = keys.map((key) => `${indent.stringifyObj.beginIndent}${key}: ${stringify(data[key], depth + 1)}`);
+  return ['{', ...result, `${indent.stringifyObj.endIndent}}`].join('\n');
 };
 
 const stylish = (tree) => {
   const iter = (diff, depth) => {
-    const beginIndent = getIndent(2 * depth - 1);
-    const endIndent = getIndent(2 * depth - 2);
+    const indent = getIndent(depth);
+    const { beginIndent } = indent.changedObj;
+    const { endIndent } = indent.changedObj;
     const result = diff.map((obj) => {
       switch (obj.type) {
         case 'nested':
